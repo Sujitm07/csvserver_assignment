@@ -5,9 +5,9 @@ Steps performed:
 
 Pull and run CSVServer container:
 
-docker run -d --name csvserver-test infracloudio/csvserver:latest
+docker run -d --name csvserver infracloudio/csvserver:latest
 docker ps
-docker logs csvserver-test
+docker logs csvserver
 
 
 Observed failure due to missing input file.
