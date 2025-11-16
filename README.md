@@ -11,6 +11,7 @@ docker logs csvserver
 
 
 Observed failure due to missing input file.
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 Created script gencsv.sh to generate inputFile:
 
@@ -53,19 +54,14 @@ docker logs csvserver >& part-1-logs
 Files generated:
 
 gencsv.sh
-
 inputFile
-
 part-1-cmd
-
 part-1-output
-
 part-1-logs
-
+----------------------------------------------------------------------------------------------------------------------------------------------
 Part II – Docker Compose Setup
 
 Steps performed:
-
 Deleted any running containers from Part I:
 
 docker compose down
@@ -87,13 +83,12 @@ curl http://localhost:9393/raw
 Pushed changes to GitHub including:
 
 docker-compose.yaml
-
 csvserver.env
+----------------------------------------------------------------------------------------------------------------------------
 
 Part III – Prometheus Integration
 
 Steps performed:
-
 Created prometheus.yml to monitor CSVServer metrics:
 
 scrape_configs:
@@ -103,11 +98,8 @@ scrape_configs:
 
 
 Updated docker-compose.yaml to include Prometheus container:
-
 Image: prom/prometheus:v2.45.2
-
 Exposed Prometheus at http://localhost:9090
-
 Configured to scrape CSVServer /metrics.
 
 Run Docker Compose:
