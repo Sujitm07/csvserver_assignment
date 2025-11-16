@@ -1,1 +1,5 @@
-docker run -d --name csvserver -p 9393:9300 -v $(pwd)/inputFile:/csvserver/inputdata -e CSVSERVER_BORDER=Orange infracloudio/csvserver:latest
+docker run -d --name csvserver \
+  -v /root/csvserver/solution/inputFile:/csvserver/inputdata \
+  -p 9393:9300 \
+  -e CSVSERVER_BORDER=Orange \
+  infracloudio/csvserver:latest
