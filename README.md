@@ -1,5 +1,6 @@
 Part I – Run CSVServer with inputFile
 1. Clone Repository
+
 git clone https://github.com/infracloudio/csvserver
 cd csvserver/solution
 
@@ -7,10 +8,13 @@ cd csvserver/solution
 
 Initial run failed due to missing input file:
 
+
 docker run -d --name csvserver infracloudio/csvserver:latest
 docker logs csvserver
 
 3. Create gencsv.sh to generate inputFile
+
+
 vi gencsv.sh
 chmod +x gencsv.sh
 ./gencsv.sh 2 8
@@ -25,6 +29,10 @@ chmod +x gencsv.sh
 8, 120
 
 5. Run CSVServer with inputFile + Orange Border
+
+
+
+
 docker run -d --name csvserver \
   -v /root/csvserver/solution/inputFile:/csvserver/inputdata \
   -p 9393:9300 \
@@ -41,44 +49,26 @@ curl -o ./part-1-output http://localhost:9393/raw
 
 docker logs csvserver >& part-1-logs
 
-Files Generated in Part I
 
-gencsv.sh
-
-inputFile
-
-part-1-cmd
-
-part-1-output
-
-part-1-logs
 
 Part II – Docker Compose Setup
-1. Clean previous containers
+1. Created docker-compose.yaml and csvserver.env
+
 docker compose down
+vim docker-compose.yaml
+vim csvserver.env
 
-2. Created docker-compose.yaml
 
-Includes:
 
-CSVServer container
+2. Run with Docker Compose
 
-Environment variables in csvserver.env
-
-Port exposed at http://localhost:9393
-
-3. Run with Docker Compose
+   
 docker compose up -d
 docker ps
 curl http://localhost:9393/raw
+docker compose logs csvserver
 
-4. Pushed to GitHub
 
-Files added:
-
-docker-compose.yaml
-
-csvserver.env
 
 Part III – Prometheus Integration
 1. Created prometheus.yml
@@ -86,6 +76,14 @@ scrape_configs:
   - job_name: 'csvserver'
     static_configs:
       - targets: ['csvserver:9300']
+
+
+docker compose down
+vim prometheus.yml
+vim docker-compose.yaml
+docker compose up -d
+docker ps
+docker compose logs prometheus
 
 2. Updated docker-compose.yaml
 
