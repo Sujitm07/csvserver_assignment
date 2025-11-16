@@ -2,6 +2,10 @@ CSVServer Assignment
 Part I – Run CSVServer with inputFile
 
 Steps performed:
+clone repo:
+git clone https://github.com/infracloudio/csvserver
+ls -lrth
+cd ./csvserver/solution
 
 Pull and run CSVServer container:
 
@@ -15,6 +19,7 @@ Observed failure due to missing input file.
 
 Created script gencsv.sh to generate inputFile:
 
+vi gencsv.sh
 chmod +x gencsv.sh
 ./gencsv.sh 2 8
 
@@ -33,8 +38,8 @@ inputFile content:
 Run CSVServer with inputFile and Orange border:
 
 docker run -d --name csvserver \
+  -v /root/csvserver/solution/inputFile:/csvserver/inputdata \
   -p 9393:9300 \
-  -v $(pwd)/inputFile:/csvserver/inputdata \
   -e CSVSERVER_BORDER=Orange \
   infracloudio/csvserver:latest
 
@@ -46,7 +51,7 @@ curl http://localhost:9393/raw
 
 Saved commands, output, and logs:
 
-echo 'docker run -d --name csvserver -p 9393:9300 -v $(pwd)/inputFile:/csvserver/inputdata -e CSVSERVER_BORDER=Orange infracloudio/csvserver:latest' > part-1-cmd
+echo 'docker run -d --name csvserver -p 9393:9300 -v /root/csvserver/solution/inputFile:/csvserver/inputdata -e CSVSERVER_BORDER=Orange infracloudio/csvserver:latest' > part-1-cmd
 curl -o ./part-1-output http://localhost:9393/raw
 docker logs csvserver >& part-1-logs
 
